@@ -123,7 +123,7 @@ def processar(sige_bytes: bytes, mp_bytes: bytes) -> bytes:
     df_m[c_cred] = pd.to_numeric(df_m[c_cred], errors="coerce").fillna(0)
     df_m[c_deb]  = pd.to_numeric(df_m[c_deb],  errors="coerce").fillna(0)
     if c_data:
-        df_m[c_data] = pd.to_datetime(df_m[c_data], errors="coerce")
+        df_m[c_data] = pd.to_datetime(df_m[c_data], errors="coerce", utc=True).dt.tz_localize(None)
     for col in filter(None, [c_ref, c_ped, c_pac, c_op]):
         df_m[col] = df_m[col].apply(_clean_id)
 
